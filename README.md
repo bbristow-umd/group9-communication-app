@@ -1,2 +1,2 @@
 # group9-communication-app
-Repository for INST347 Group 9
+This is the landing page for the INST347 Group 9 Project
