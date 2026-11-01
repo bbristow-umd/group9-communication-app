@@ -22,7 +22,7 @@ This is the landing page for the INST347 Group 9 Project
 - GitHub
 - Potentially VSCode
 
-- Team Roles
+## Team Roles
 Briana Bristow: Will be the technical writer. She will help to take the technical aspects from our project and translate it into clear documentation that meets the project guidelines. She will also help in any other roles of the project that needs attention.
 
 Devansh Singh: Potential development worker.  He can work on the application logic and on our cloud compute service and connect it to the developer. He can help out with the other tech roles when integration work is needed.
