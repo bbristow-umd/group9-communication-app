@@ -31,6 +31,6 @@ Prithvi Giduturi: Potential tester. He can work on the user interface and test e
 
 Ashwin Pugazendhi: Potential team lead. He can check in with the rest of the team, track deadlines, and speak with the instruction team on behalf of the group. He can also oversee the entire process to ensure it properly fits in with the criteria of the assignments that were given.
 
-Malachi Edney: Potential development operations. He can set up Azure resources and handle deployments.
+Malachi Edney: Development operations. He can set up Azure resources and handle deployments.
 
 
