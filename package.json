@@ -1,0 +1,13 @@
+{
+  "name": "group9-communication-app",
+  "version": "1.0.0",
+  "description": "Communication app with Azure Cosmos DB backend",
+  "main": "cosmos.js",
+  "scripts": {
+    "start": "node cosmos.js"
+  },
+  "dependencies": {
+    "@azure/cosmos": "^4.10.2",
+    "dotenv": "^16.6.1"
+  }
+}
