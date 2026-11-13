@@ -7,17 +7,26 @@ on:
   push:
     branches:
       - 'main'
+    # Only run when the API (or this workflow) changes
+    paths:
+      - 'api/**'
+      - '.github/workflows/main_group9-commapp-func.yml'
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '22' # set this to the node version to use (supports 8.x, 10.x, 12.x)
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'api' # the API lives in api/, not the repo root
+  NODE_VERSION: '22'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: read #This is required for actions/checkout
+
+    # Every run: step in this job works inside api/
+    defaults:
+      run:
+        working-directory: api
 
     steps:
       - name: 'Checkout GitHub Action'
@@ -31,12 +40,11 @@ jobs:
       - name: 'Resolve Project Dependencies Using Npm'
         shell: bash
         run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           npm install
           npm run build --if-present
           npm run test --if-present
-          popd
 
+      # Runs inside api/, so host.json ends up at the root of the zip
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
@@ -44,7 +52,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: release.zip
+          # uses: steps ignore working-directory, so give the full path
+          path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -77,5 +86,6 @@ jobs:
         with:
           app-name: 'group9-commapp-func'
           slot-name: 'Production'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          # The unzipped artifact is already just the api/ contents
+          package: '.'
           
